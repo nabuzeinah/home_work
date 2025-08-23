@@ -11,7 +11,7 @@ void main() {
   var grades =
       students[0]['grade'] + students[1]['grade'];
   ;
-  print(grades);
-  double averageGrade = grades / 2;
+  print(grades.toDouble());
+  double averageGrade = grades.toDouble() / 2;
   print(averageGrade);
 }
