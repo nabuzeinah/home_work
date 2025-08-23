@@ -2,7 +2,7 @@ void main() {
   // Demonstrate var vs dynamic
   var x = 10;
   print(x); // var as int
- // x = 'Nidaa'; // show error that can't assign String to int
+  x = 'Nidaa'; // show error that can't assign String to int
   print(x);
 
   // Demonstrate dynamic
