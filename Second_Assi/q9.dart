@@ -8,8 +8,8 @@ void main() {
   print(students[1]['grade']);
 
   // Calculate and print the average grade
-  num grades =
-      students[0]['grade'].toDouble() + students[1]['grade'].toDouble();
+  var grades =
+      students[0]['grade'] + students[1]['grade'];
   ;
   print(grades);
   double averageGrade = grades / 2;
