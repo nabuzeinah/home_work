@@ -22,7 +22,7 @@ class Product {
     }
   }
 
-  set price(int price) {
+  set price(double price) {
     if (price >= 0) {
       this._price = price;
     } else {
