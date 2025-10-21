@@ -10,6 +10,7 @@ class HeaderSection extends StatelessWidget {
           color: Color(0xFF7F5FB7),
           borderRadius: BorderRadius.circular(20),
         ),
+
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -20,15 +21,16 @@ class HeaderSection extends StatelessWidget {
                 spacing: 10,
                 children: [
                   Text(
-                    'Hello!',
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    'Hello! ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Transform.rotate(
                     angle: 50 * 3.14 / 180,
-                    child: Icon(
-                      Icons.back_hand,
-                      color: Colors.yellow,
-                    ),
+                    child: Icon(Icons.back_hand, color: Colors.yellow),
                   ),
                 ],
               ),
@@ -44,6 +46,14 @@ class HeaderSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Color(0xFF663BB6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(.2),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
                     child: Center(
                       child: Text(
