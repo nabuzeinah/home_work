@@ -14,13 +14,15 @@ class TasksListWidget extends StatefulWidget {
 class _TasksListWidgetState extends State<TasksListWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (int i = 0; i < widget.myTaskManager.tasks.length; i++)
-        TaskWidget(
-          task: widget.myTaskManager.tasks[i],
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          for (int i = 0; i < widget.myTaskManager.tasks.length; i++)
+          TaskWidget(
+            task: widget.myTaskManager.tasks[i],
+          ),
+        ],
+      ),
     );
   }
 }

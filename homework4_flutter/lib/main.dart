@@ -17,6 +17,7 @@ class MyTasks extends StatefulWidget {
 
 class _MyTasksState extends State<MyTasks> {
   TasksManager myTaskManager = TasksManager();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _MyTasksState extends State<MyTasks> {
               ),
               child: ListTile(
                 title: TextField(
+                  controller: _controller,
                   decoration: InputDecoration(
                     hoverColor: Colors.grey,
                     hintText: 'Add a new task...',
@@ -62,14 +64,15 @@ class _MyTasksState extends State<MyTasks> {
                 ),
                 trailing: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(), // Makes the button circular
-                    padding: EdgeInsets.all(12), // Adjust padding as needed
+                    shape: CircleBorder(), 
+                    padding: EdgeInsets.all(12), 
                     backgroundColor:
-                        Colors.grey[200], // Button background color
-                    foregroundColor: Colors.grey, // Text/icon color
+                        Colors.grey[200], 
+                    foregroundColor: Colors.grey, 
                   ),
                   onPressed: () {
-                    myTaskManager.createTask('10 mins reading', false);
+                    String enteredText = _controller.text;
+                    myTaskManager.createTask(enteredText, false);
                     setState(() {});
                   },
                   child: Icon(Icons.add, size: 40),
