@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:homework4_flutter/models/task_manager_model.dart';
 import 'package:homework4_flutter/widgets/no_tasks_widget.dart';
 import 'package:homework4_flutter/widgets/tasks_list_widget.dart';
-import 'package:homework4_flutter/widgets/text_field_widget.dart';
 
 void main() {
   runApp(const MyTasks());
@@ -36,7 +35,14 @@ class _MyTasksState extends State<MyTasks> {
             Expanded(
               child:
                   myTaskManager.hasTasks()
-                      ? TasksListWidget(myTaskManager: myTaskManager)
+                      ? TasksListWidget(
+                        myTaskManager: myTaskManager, 
+                        onDelete: (){
+                          setState(() {
+                        
+                      });
+                      },
+                      )
                       : NoTasksWidget(),
             ),
             Container(
@@ -59,6 +65,7 @@ class _MyTasksState extends State<MyTasks> {
                     hintText: 'Add a new task...',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
+                      
                     ),
                   ),
                 ),
@@ -75,7 +82,7 @@ class _MyTasksState extends State<MyTasks> {
                     myTaskManager.createTask(enteredText, false);
                     setState(() {});
                   },
-                  child: Icon(Icons.add, size: 40),
+                  child: Icon(Icons.add, size: 30),
                 ),
               ),
             ),

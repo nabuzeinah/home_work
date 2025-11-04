@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:homework4_flutter/models/task_manager_model.dart';
 import 'package:homework4_flutter/models/task_model.dart';
 import 'package:intl/intl.dart';
 
 class TaskWidget extends StatefulWidget {
   final Task task;
-  const TaskWidget({super.key, required this.task});
+  final TasksManager myTaskManager;
+  final Function() onDelete;
+  const TaskWidget({
+    super.key,
+    required this.task,
+    required this.myTaskManager,
+    required this.onDelete,
+  });
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -13,13 +21,11 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   bool isChecked = false;
 
-  TextStyle unCheckedTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    );
+  TextStyle unCheckedTextStyle = TextStyle(fontWeight: FontWeight.bold);
   TextStyle checkedTextStyle = TextStyle(
     color: Colors.grey,
-    decoration: TextDecoration.lineThrough, 
-    decorationColor: Colors.grey, 
+    decoration: TextDecoration.lineThrough,
+    decorationColor: Colors.grey,
     decorationThickness: 2,
   );
 
@@ -57,7 +63,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
         title: Text(
           widget.task.title,
-          style: isChecked?checkedTextStyle:unCheckedTextStyle,
+          style: isChecked ? checkedTextStyle : unCheckedTextStyle,
         ),
         subtitle: Row(
           children: [
@@ -72,14 +78,13 @@ class _TaskWidgetState extends State<TaskWidget> {
           ],
         ),
         trailing: GestureDetector(
-          child: Icon(
-            Icons.delete_outline_outlined, 
-            color: Colors.red,
-            ),
-            onTap: () {
-              
-            },
-            ),
+          child: Icon(Icons.delete_outline_outlined, color: Colors.red),
+          onTap: () {
+            widget.myTaskManager.deleteTask(widget.task.title);
+            widget.onDelete();
+            setState(() {});
+          },
+        ),
       ),
     );
   }
