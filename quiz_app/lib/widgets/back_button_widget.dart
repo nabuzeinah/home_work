@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BackButtonWidget extends StatelessWidget {
-  const BackButtonWidget({super.key});
+  const BackButtonWidget({super.key, required this.onBackClick});
+  final VoidCallback onBackClick;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
                 
-                onPressed: () {
-                  // Navigator.push(context, 
-                  // MaterialPageRoute(
-                  //   builder: (context)=> QuestionPage()),
-                  //   );
-                },
+                onPressed: onBackClick,
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0XFF352E49),

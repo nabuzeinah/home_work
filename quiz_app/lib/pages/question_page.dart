@@ -6,8 +6,15 @@ import 'package:quiz_app/widgets/next_button_widget.dart';
 import 'package:quiz_app/widgets/options_list_widget.dart';
 import 'package:quiz_app/widgets/question_number_widget.dart';
 
-class QuestionPage extends StatelessWidget {
+class QuestionPage extends StatefulWidget {
   QuestionPage({super.key});
+  int index = 0;
+
+  @override
+  State<QuestionPage> createState() => _QuestionPageState();
+}
+
+class _QuestionPageState extends State<QuestionPage> {
   QuestionsManager myQuestions = QuestionsManager();
 
   @override
@@ -17,33 +24,56 @@ class QuestionPage extends StatelessWidget {
         children: [
           BackgroundWidget(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 110),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 30,
               children: [
                 QuestionNumber(
-                  questionNumber: myQuestions.questions[0].questionNumber!,
+                  questionNumber:
+                      myQuestions.questions[widget.index].questionNumber!,
                 ),
-                Text(myQuestions.questions[0].title!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30
-                ),),
-                OptionsWidget(myQuestions: myQuestions),
+                Expanded(
+                  child: Column(
+                    spacing: 30,
+                    children: [
+                      Text(
+                        myQuestions.questions[widget.index].title!,
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                      OptionsWidget(
+                        question: myQuestions.questions[widget.index],
+                      ),
+                    ],
+                  ),
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BackButtonWidget(),
-                    NextButtonWidget(),
+                    BackButtonWidget(
+                      onBackClick: () {
+                        if (widget.index > 0) {
+                          widget.index--;
+                          setState(() {});
+                        }
+                      },
+                    ),
+                    NextButtonWidget(
+                      onNextClick: () {
+                        if (widget.index < myQuestions.questions.length - 1) {
+                          widget.index++;
+                          setState(() {});
+                        }
+                      },
+                    ),
                   ],
                 ),
               ],
             ),
           ),
         ],
-    
       ),
     );
   }
