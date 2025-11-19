@@ -56,5 +56,17 @@ class QuestionsManager {
 
   ];
 
+  int calculateResult() {
+    int score = 0;
+    for (var question in questions) {
+      if (question.userAnswers != null &&
+          question.userAnswers!.toSet().containsAll(question.correctAnswers) &&
+          question.userAnswers!.length == question.correctAnswers.length) {
+        score++;
+      }
+    }
+    return score;
+  }
+
  
 }

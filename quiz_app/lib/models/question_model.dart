@@ -4,7 +4,7 @@ class Question {
   List<String> options;
   bool isMultiAnswer;
   List<String> correctAnswers;
-  List<String>? userAnswers;
+  List<int> userAnswers = [];
 
   Question({
     required this.questionNumber,
@@ -14,7 +14,7 @@ class Question {
     required this.correctAnswers,
   });
 
-  void updateAnswer(String answer) {
-    userAnswers!.add(answer);
+  void updateAnswer(int answerIndex) {
+    userAnswers.add(answerIndex);
   }
 }

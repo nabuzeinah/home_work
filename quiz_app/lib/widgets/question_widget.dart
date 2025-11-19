@@ -11,23 +11,26 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 30,
-      children: [
-        QuestionNumber(
-          questionNumber: myQuestion.questionNumber!,
-          imageURL: 'assets/images/2.png',
-        ),
-        Text(
-          myQuestion.title!,
-          style: TextStyle(color: Colors.white, fontSize: 30),
-        ),
-        myQuestion.isMultiAnswer
-            ? MultiOptionsList(question: myQuestion)
-            : OneOptionsList(question: myQuestion),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 30,
+        children: [
+          QuestionNumber(
+            questionNumber: myQuestion.questionNumber!,
+            imageURL: 'assets/images/2.png',
+          ),
+          Text(
+            myQuestion.title!,
+            style: TextStyle(color: Colors.white, fontSize: 30),
+          ),
+          myQuestion.isMultiAnswer
+              ? MultiOptionsList(question: myQuestion)
+              : OneOptionsList(question: myQuestion),
+        ],
+      ),
     );
   }
 }

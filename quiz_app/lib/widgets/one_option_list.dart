@@ -12,25 +12,34 @@ class OneOptionsList extends StatefulWidget {
 
 class _OneOptionsListState extends State<OneOptionsList> {
   bool isOptionSlected = false;
-  int index = 0;
+  int index = -1;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      spacing: 10,
-      children: [
-        for (int i = 0; i < widget.question.options.length; i++)        
-          OptionWidget(
-            text: widget.question.options[i],
-            isMultiOption: widget.question.isMultiAnswer,
-            isSelected: isOptionSlected && index == i?true:false,
-            onTapOneOption: () {
-              isOptionSlected = true;
-              index = i;
-              setState(() {});
-            },
-          ),
-      ],
+    return Expanded(
+      child: ListView.builder(
+        itemCount: widget.question.options.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: OptionWidget(
+              text: widget.question.options[index],
+              isMultiOption: widget.question.isMultiAnswer,
+              isSelected: isOptionSlected && this.index == index ? true : false,
+              onTapOneOption: () {
+                isOptionSlected = true;
+                this.index = index;
+                if (widget.question.userAnswers.isNotEmpty) {
+                  widget.question.userAnswers.clear();
+                  widget.question.updateAnswer(this.index);
+                } else {
+                  widget.question.updateAnswer(this.index);
+                }
+                setState(() {});
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

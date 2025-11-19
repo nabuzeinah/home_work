@@ -7,7 +7,7 @@ import 'package:quiz_app/widgets/question_widget.dart';
 
 class QuestionPage extends StatefulWidget {
   QuestionPage({super.key});
-  int index = 0;
+
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -15,6 +15,14 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   QuestionsManager myQuestions = QuestionsManager();
+    PageController pageController = PageController();
+    int pageIndex = 0;
+
+    @override 
+    void dispose() {
+      pageController.dispose();
+      super.dispose();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -23,41 +31,45 @@ class _QuestionPageState extends State<QuestionPage> {
         children: [
           BackgroundWidget(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 110),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
             child: Column(
               children: [
                 Expanded(
-                  child: PageView(
-                
+                  child: PageView.builder(
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      pageIndex = index;
+                      setState(() {});
+                    },
+                    itemCount: myQuestions.questions.length,
+                    itemBuilder: (context, index) {
+                      return QuestionWidget(
+                        myQuestion: myQuestions.questions[index],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      for (int i = 0; i < myQuestions.questions.length; i++) 
-                      QuestionWidget(
-                        myQuestion: myQuestions.questions[i],
+                      Visibility(
+                        visible: pageIndex != 0,
+                        child: BackButtonWidget(
+                          pageController: pageController,
+                         
+                        ),
+                      ),
+                      NextButtonWidget(
+                        myQuestions: myQuestions,
+                        pageCount: myQuestions.questions.length,
+                        pageController: pageController,
+                       
                       ),
                     ],
                   ),
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BackButtonWidget(
-                      onBackClick: () {
-                        if (widget.index > 0) {
-                          widget.index--;
-                          setState(() {});
-                        }
-                      },
-                    ),
-                    NextButtonWidget(
-                      onNextClick: () {
-                        if (widget.index < myQuestions.questions.length - 1) {
-                          widget.index++;
-                          setState(() {});
-                        }
-                      },
-                    ),
-                  ],
                 ),
               ],
             ),

@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/questions_manager.dart';
+import 'package:quiz_app/pages/result_page.dart';
 
 class NextButtonWidget extends StatelessWidget {
-  const NextButtonWidget({super.key, required this.onNextClick});
-  final VoidCallback onNextClick;
+  const NextButtonWidget({
+    super.key,
+    required this.pageController,
+    required this.pageCount, 
+    required this.myQuestions,
+  });
 
+  final PageController pageController;
+  final QuestionsManager myQuestions;
+  final int pageCount;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onNextClick,
+      onPressed: () {
+        if (pageController.page!.toInt() < pageCount - 1) {
+          pageController.nextPage(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ResultPage(myQuestions: myQuestions,)),
+          );
+        }
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: Color(0XFF8C82FC),
         minimumSize: Size(60, 45),
