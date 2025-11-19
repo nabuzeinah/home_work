@@ -7,6 +7,7 @@ class BackgroundWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
+          
           gradient: RadialGradient(
             colors: [
               Color(0XFF564770), // Inner color
@@ -14,9 +15,10 @@ class BackgroundWidget extends StatelessWidget {
             ],
             center: Alignment.center, // Center of the gradient
             radius:1, 
-            stops: [0, 1], // Where each color begins and ends
+            stops: [0, 1], 
           ),
         ),
+        
     );
   }
 }

@@ -12,6 +12,14 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           BackgroundWidget(),
+          Container(
+             decoration: BoxDecoration(
+          image: DecorationImage(
+          image: AssetImage('assets/images/home_image.png'),
+          fit: BoxFit.contain,
+        ),
+         ),
+          ),
           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
           child: Column(
@@ -24,6 +32,7 @@ class HomeScreen extends StatelessWidget {
                 children: [                  
                   const Text('Good morning,', 
                   style: TextStyle(
+                    fontFamily: 'Gilroy',
                     color: Colors.white,
                     fontSize: 18,
                     ),
@@ -31,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                   const Text(
                     'New topic is waiting',
                     style: TextStyle(
+                      fontFamily: 'Gilroy',
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,

@@ -3,8 +3,7 @@ import 'package:quiz_app/models/questions_manager.dart';
 import 'package:quiz_app/widgets/back_button_widget.dart';
 import 'package:quiz_app/widgets/background_widget.dart';
 import 'package:quiz_app/widgets/next_button_widget.dart';
-import 'package:quiz_app/widgets/options_list_widget.dart';
-import 'package:quiz_app/widgets/question_number_widget.dart';
+import 'package:quiz_app/widgets/question_widget.dart';
 
 class QuestionPage extends StatefulWidget {
   QuestionPage({super.key});
@@ -26,24 +25,14 @@ class _QuestionPageState extends State<QuestionPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 110),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 30,
               children: [
-                QuestionNumber(
-                  questionNumber:
-                      myQuestions.questions[widget.index].questionNumber!,
-                ),
                 Expanded(
-                  child: Column(
-                    spacing: 30,
+                  child: PageView(
+                
                     children: [
-                      Text(
-                        myQuestions.questions[widget.index].title!,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                      OptionsWidget(
-                        question: myQuestions.questions[widget.index],
+                      for (int i = 0; i < myQuestions.questions.length; i++) 
+                      QuestionWidget(
+                        myQuestion: myQuestions.questions[i],
                       ),
                     ],
                   ),
